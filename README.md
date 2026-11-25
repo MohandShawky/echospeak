@@ -1,44 +1,73 @@
-<<<<<<< HEAD
-# echospeak
-=======
-# EchoSpeak — Shadowing Coach MVP
+# EchoSpeak — Shadowing Coach
 
-A React + JavaScript MVP for practicing English shadowing with YouTube videos and Shorts.
+EchoSpeak is a React web application and browser extension for practicing English shadowing with YouTube videos. A learner chooses a video segment, speaks along with it, listens back to the attempt, and reviews what the browser recognized.
+
+## Features
+
+- YouTube and YouTube Shorts URL support
+- Embedded YouTube video player
+- Start and end practice range using a dual slider or manual `mm:ss` inputs
+- Collapsible reference transcript that remains available for comparison
+- Timestamp-aware transcript parsing
+- Microphone recording with a live voice waveform
+- Playback and discard controls for the latest recording
+- Browser speech recognition when supported
+- Manual text-entry fallback for unsupported browsers
+- Word-match feedback showing missing and extra words
+- Clickable recognized words with definitions, examples, pronunciation, and available antonyms
+- Responsive dark interface
+- YouTube transcript importer extension
 
 ## Run locally
 
 1. Install Node.js.
-2. From this folder run `npm install`.
-3. Run `npm run dev`.
-4. Open the local URL shown by Vite.
+2. Open a terminal in this folder.
+3. Install dependencies:
 
-## Implemented
+   ```powershell
+   npm install
+   ```
 
-- YouTube and YouTube Shorts URL parsing
-- Embedded YouTube player
-- Editable reference transcript area with timestamp parsing
-- Recognizes timestamp-only lines and timestamp-plus-text lines, then excludes timestamps from feedback
-- Microphone recording permission and session-only recording
-- Browser speech recognition when supported
-- Manual transcript input fallback
-- Word-match score with missing and extra words
-- Responsive dark learning interface
-- Loading and error feedback for invalid links, permissions, and unsupported browsers
+4. Start the development server:
 
-## Libraries and browser APIs
+   ```powershell
+   npm run dev
+   ```
 
-- React and React DOM: UI and component rendering
-- Vite: development server and production build
-- YouTube embed: video playback without downloading YouTube media
-- MediaRecorder and getUserMedia: microphone capture
-- SpeechRecognition/Web Speech API: optional browser speech-to-text
-- CSS: custom responsive styling; no Tailwind or Bootstrap used in this MVP
+5. Open the local URL shown by Vite, usually `http://localhost:5173`.
 
-The app intentionally does not scrape or download YouTube transcripts or audio. The learner can paste the transcript from YouTube’s “Show transcript” panel.
+To create a production build:
 
+```powershell
+npm run build
+```
 
+## Install the YouTube extension locally
 
-## Use the YouTube extension
+1. Start EchoSpeak with `npm run dev`.
+2. Open `chrome://extensions` in Chrome or `edge://extensions` in Edge.
+3. Enable **Developer mode**.
+4. Select **Load unpacked**.
+5. Choose the project's `extension` folder.
+6. Open a YouTube video and click **Import to EchoSpeak**.
 
-The extension is in the `extension` folder. Start the app first, then load that folder from `chrome://extensions` with Developer mode enabled. On a YouTube watch page, click `Import to EchoSpeak`. The extension reads the transcript segments displayed by YouTube and opens the app with the video URL, timestamps, and transcript already filled in.
->>>>>>> a6e98fb (Initial EchoSpeak MVP)
+The extension opens the transcript automatically when possible, reads the visible transcript segments, and sends the video URL, timestamps, and transcript to the local EchoSpeak tab. If the extension code changes, reload it from the browser's extensions page.
+
+## Technology
+
+- React and React DOM for the interface
+- Vite for development and production builds
+- Custom CSS; no Tailwind or Bootstrap
+- YouTube iframe embed for video playback
+- `MediaRecorder` and `getUserMedia` for microphone capture
+- Web Speech API for optional browser speech-to-text
+- Dictionary API for word definitions and examples
+- Datamuse API for additional WordNet-based antonym results
+
+## Important limitations
+
+- Browser speech recognition is best supported in Chrome and Edge. Other browsers may record audio without producing live text.
+- Speech recognition results are treated as possible word differences, not definitive pronunciation judgments.
+- The app does not download YouTube audio or transcripts. It uses the embedded player and the transcript displayed by YouTube or supplied by the learner.
+- Recordings are kept in the current browser session and are not uploaded by the MVP.
+- Dictionary and antonym results depend on the external services being available and may not exist for every word or meaning.
